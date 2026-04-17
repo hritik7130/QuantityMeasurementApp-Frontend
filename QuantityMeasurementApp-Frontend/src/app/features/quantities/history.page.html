@@ -1,0 +1,64 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>History</mat-card-title>
+    <mat-card-subtitle>Your recent calculations are saved here.</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="toolbar">
+      <button mat-stroked-button type="button" (click)="refresh()" [disabled]="loading">
+        <mat-icon>refresh</mat-icon>
+        Refresh
+      </button>
+    </div>
+
+    <mat-progress-bar *ngIf="loading" mode="indeterminate" />
+
+    <div class="tableWrap" *ngIf="rows().length; else empty">
+      <table mat-table [dataSource]="rows()" class="mat-elevation-z1">
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef>Time</th>
+          <td mat-cell *matCellDef="let r">{{ r.timestamp }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="measurementType">
+          <th mat-header-cell *matHeaderCellDef>Measurement</th>
+          <td mat-cell *matCellDef="let r">{{ r.measurementType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="operationType">
+          <th mat-header-cell *matHeaderCellDef>Operation</th>
+          <td mat-cell *matCellDef="let r">{{ r.operationType }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="input1">
+          <th mat-header-cell *matHeaderCellDef>Input 1</th>
+          <td mat-cell *matCellDef="let r">{{ r.inputValue1 }} {{ r.unit1 }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="input2">
+          <th mat-header-cell *matHeaderCellDef>Input 2</th>
+          <td mat-cell *matCellDef="let r">
+            <span *ngIf="r.unit2; else dash">{{ r.inputValue2 }} {{ r.unit2 }}</span>
+            <ng-template #dash>—</ng-template>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="result">
+          <th mat-header-cell *matHeaderCellDef>Result</th>
+          <td mat-cell *matCellDef="let r">{{ r.result }} {{ r.resultUnit }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <ng-template #empty>
+      <div class="empty">
+        No history yet. Run an operation after logging in to start collecting entries.
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>
+

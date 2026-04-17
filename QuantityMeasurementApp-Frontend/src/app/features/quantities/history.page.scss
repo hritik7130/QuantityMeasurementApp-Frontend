@@ -1,0 +1,22 @@
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 0 12px;
+}
+
+.tableWrap {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 860px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.empty {
+  padding: 16px 0;
+  opacity: 0.7;
+}
+

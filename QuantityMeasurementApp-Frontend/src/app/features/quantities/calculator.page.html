@@ -1,0 +1,92 @@
+<div class="grid">
+  <mat-card>
+    <mat-card-header>
+      <div class="hero">
+        <div class="hero__badge">Let’s Measure!</div>
+        <mat-card-title class="hero__title">Quantity operations</mat-card-title>
+        <mat-card-subtitle class="hero__subtitle">Pick an operation and have fun measuring.</mat-card-subtitle>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Measurement</mat-label>
+            <mat-select formControlName="measurementType">
+              <mat-option *ngFor="let t of measurementTypes" [value]="t.id">{{ t.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Operation</mat-label>
+            <mat-select formControlName="operationType">
+              <mat-option *ngFor="let o of operationTypes" [value]="o.id">
+                <span class="opOpt">{{ operationEmoji[o.id] }} {{ o.label }}</span>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline">
+            <mat-label>Input 1 value</mat-label>
+            <input matInput type="number" formControlName="input1Value" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Input 1 unit</mat-label>
+            <mat-select formControlName="input1Unit">
+              <mat-option *ngFor="let u of units()" [value]="u.id">{{ u.label }} ({{ u.id }})</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="needsSecondInput()">
+          <mat-form-field appearance="outline">
+            <mat-label>Input 2 value</mat-label>
+            <input matInput type="number" formControlName="input2Value" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Input 2 unit</mat-label>
+            <mat-select formControlName="input2Unit">
+              <mat-option *ngFor="let u of units()" [value]="u.id">{{ u.label }} ({{ u.id }})</mat-option>
+            </mat-select>
+            <mat-hint *ngIf="isMultiply()">Multiply requires same unit</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="row" *ngIf="showsResultUnit()">
+          <mat-form-field appearance="outline" class="full">
+            <mat-label>Result unit</mat-label>
+            <mat-select formControlName="resultUnit">
+              <mat-option *ngFor="let u of units()" [value]="u.id">{{ u.label }} ({{ u.id }})</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="actions">
+          <button mat-raised-button color="primary" class="runBtn" type="submit" [disabled]="loading">
+            <mat-icon>rocket_launch</mat-icon>
+            Run
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="result" *ngIf="result() as r">
+    <mat-card-header>
+      <mat-card-title>Result</mat-card-title>
+      <mat-card-subtitle>Ta‑da! Here’s what you got.</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="result__value">{{ r.value }}</div>
+      <mat-chip-set>
+        <mat-chip class="result__chip">{{ r.unit }}</mat-chip>
+      </mat-chip-set>
+    </mat-card-content>
+  </mat-card>
+</div>
+

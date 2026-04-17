@@ -1,0 +1,134 @@
+.auth {
+  display: grid;
+  place-items: start center;
+  padding-top: 44px;
+}
+
+.auth--split {
+  padding-top: 56px;
+}
+
+.auth__form {
+  display: grid;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.splitCard {
+  width: 100%;
+  max-width: 1240px;
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  overflow: hidden;
+  padding: 0 !important;
+  border-radius: 28px !important;
+  min-height: 420px;
+}
+
+.splitCard__left {
+  position: relative;
+  background: linear-gradient(180deg, #00a86b, #02c39a);
+  color: white;
+  min-height: 420px;
+}
+
+.splitCard__left:after {
+  content: '';
+  position: absolute;
+  inset: -40px -80px -40px auto;
+  width: 220px;
+  background: white;
+  transform: skewX(-35deg);
+  opacity: 1;
+}
+
+.splitCard__leftInner {
+  position: relative;
+  z-index: 1;
+  padding: 38px 26px;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
+.splitCard__title {
+  font-family: 'Baloo 2', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.splitCard__text {
+  opacity: 0.95;
+  font-weight: 600;
+}
+
+.splitCard__cta {
+  justify-self: start;
+  border-color: rgba(255, 255, 255, 0.9) !important;
+  color: white !important;
+  border-radius: 999px !important;
+  padding: 10px 18px !important;
+}
+
+.splitCard__right {
+  padding: 34px 44px;
+  display: grid;
+  align-content: center;
+}
+
+.splitCard__rightInner {
+  max-width: 520px;
+}
+
+.splitCard__rightTitle {
+  font-family: 'Baloo 2', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #3a3a3a;
+}
+
+.splitCard__primary {
+  border-radius: 999px !important;
+  border-width: 2px !important;
+  border-color: #00a86b !important;
+  color: #00a86b !important;
+  font-weight: 800 !important;
+  padding: 10px 18px !important;
+}
+
+.splitCard__smallLinks {
+  margin-top: 10px;
+}
+
+.googleBtn {
+  width: 100%;
+  justify-content: center !important;
+  border-radius: 999px !important;
+  border-width: 2px !important;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.googleBtn__icon {
+  width: 18px;
+  height: 18px;
+  display: inline-grid;
+  place-items: center;
+  margin-right: 10px;
+}
+
+.googleBtn__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 920px) {
+  .splitCard {
+    grid-template-columns: 1fr;
+  }
+  .splitCard__left:after {
+    display: none;
+  }
+}
+
